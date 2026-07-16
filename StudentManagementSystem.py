@@ -1,3 +1,23 @@
+import json
+
+
+def save_students(students):
+    data = []
+    for student in students:
+        s = {"name" : student.name, "roll" : student.roll , "age" : student.age}
+        data.append(s)
+    with open("students.json","w") as f:
+        json.dump(data,f)
+    # json.dump(students)
+
+def load_students(students):
+    with open("students.json","r") as f:
+        data = json.load(f)
+    
+    for item in data:
+        student = Student(item["name"],item["roll"],item["age"])
+        students.append(student)
+
 def add_student():
     print("|| Enter Student Detail ||")
     name = input("Enter Name :")
@@ -15,9 +35,9 @@ def display_students(students):
 
 def delete_student(students):
     roll = int(input("Enter Roll no. "))
-    for Student in students:
-        if Student.roll == roll:
-            students.remove(Student)
+    for student in students:
+        if student.roll == roll:
+            students.remove(student)
             print("Student Deleted Successfully !!!")
             break
     else:
@@ -25,23 +45,23 @@ def delete_student(students):
     
 def search_student(students):
     roll = int(input("Enter Roll no. "))
-    for Student in students:
-        if Student.roll == roll:
-            print("Name : ",Student.name)
-            print("Roll : ",Student.roll)
-            print("Age : ",Student.age)
+    for student in students:
+        if student.roll == roll:
+            print("Name : ",student.name)
+            print("Roll : ",student.roll)
+            print("Age : ",student.age)
             break
     else:
         print("Student Does not exist")
 
 def update_student(students):
     roll = int(input("Enter Roll no. "))
-    for Student in students:
-        if Student.roll == roll:
+    for student in students:
+        if student.roll == roll:
             name = input("Enter updated name :")
             age = int(input("Enter Updates age :"))
-            Student.name = name
-            Student.age = age
+            student.name = name
+            student.age = age
             print("Updated Successfully !!!")
             break
     else:
@@ -61,6 +81,8 @@ students = []
 # s1 = student("atharva",42,18)
 # print(s1.name)
 
+load_students(students)
+
 while True:
 
     print("1. ADD Student")
@@ -69,23 +91,26 @@ while True:
     print("4. Search Student")
     print("5. Update Student")
     print("6. Count Student")
-    print("7. Exist")
+    print("7. Exit")
     choice = int(input("Enter Your Choice: "))
 
     if choice==1:
         students.append(add_student())
+        save_students(students)
 
     elif choice ==2:
         display_students(students)
 
     elif choice == 3:
         delete_student(students)
+        save_students(students)
 
     elif choice == 4:
         search_student(students)
 
     elif choice == 5:
         update_student(students)
+        save_students(students)
 
     elif choice == 6:
         print("Total Students  ",len(students))
