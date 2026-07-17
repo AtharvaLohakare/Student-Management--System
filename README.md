@@ -1,16 +1,32 @@
 # Student Management System
 
-A menu-driven Python application developed using Object-Oriented Programming.
+A Python-based Student Management System built using Object-Oriented Programming.
 
 ## Features
+
 - Add Student
-- Display Students
-- Search Student
 - Delete Student
+- Search Student
 - Update Student
-- Exist
+- Count Students
+- Save to JSON
+- Load from JSON
+- Exception Handling
 
 ## Technologies
+
 - Python
+- JSON
 - OOP
-- Import json
+- File Handling
+
+## Project Structure
+
+main.py
+operations.py
+student.py
+students.json
+
+## How to Run
+
+python main.py
