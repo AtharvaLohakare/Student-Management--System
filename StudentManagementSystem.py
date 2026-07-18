@@ -60,21 +60,18 @@ def display_students(students):
         print("=" * 40)
 
 def find_student(students):
-    try:
-        roll_name = input("Enter Roll no. or name ")
-        if roll_name.isdigit():
-            roll_name = int(roll_name)
-        else:
-            roll_name = roll_name.lower()
-        
-        for student in students:
-            if student.roll == roll_name or student.name.lower() == roll_name:
-                return student
-        else:
-            return None
+    roll_name = input("Enter Roll no. or name ")
+    if roll_name.isdigit():
+        roll_name = int(roll_name)
+    else:
+        roll_name = roll_name.lower()
+    
+    for student in students:
+        if student.roll == roll_name or student.name.lower() == roll_name:
+            return student
+    else:
+        return None
 
-    except ValueError:
-       print("Inavlid Detail !")
 
 def delete_student(students):
     student = find_student(students)
