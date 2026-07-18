@@ -10,6 +10,7 @@ def save_students(students):
     # json.dump(students)
 
 
+
 def load_students(students):
     try:
         with open("students.json","r") as f:
@@ -50,54 +51,64 @@ def display_students(students):
     if len(students) == 0:
         print("No Student Found")
     else:
+        print("=" * 40)
+        print(f"{"No.":<5}{'Name':<15}{'Roll no.':<15}{'age'}")
+        print("=" * 40)
+        # for student in students:
+        for i ,  student in enumerate(students,start=1):
+            print(f"{i:<5}{student.name:<15}{student.roll:<15}{student.age}")
+        print("=" * 40)
+
+def find_student(students):
+    try:
+        roll_name = input("Enter Roll no. or name ")
+        if roll_name.isdigit():
+            roll_name = int(roll_name)
+        else:
+            roll_name = roll_name.lower()
+        
         for student in students:
-            print("Name : ",student.name,"|| Roll : ",student.roll,"|| Age : ",student.age)
+            if student.roll == roll_name or student.name.lower() == roll_name:
+                return student
+        else:
+            return None
+
+    except ValueError:
+       print("Inavlid Detail !")
 
 def delete_student(students):
-    try:
-        roll = int(input("Enter Roll no. "))
-        for student in students:
-            if student.roll == roll:
-                students.remove(student)
-                print("Student Deleted Successfully !!!")
-                break
-        else:
-            print("Student Does not exist")
-
-    except ValueError:
-        print("Invalid Roll no.")
+    student = find_student(students)
+    if student is not None:
+        students.remove(student)
+        print("Student DeletedSuccessfully !!!")
+    else:
+        print("Student Does not exist !")
     
 def search_student(students):
-    try:
-        roll = int(input("Enter Roll no. "))
-        for student in students:
-            if student.roll == roll:
-                print("Name : ",student.name)
-                print("Roll : ",student.roll)
-                print("Age : ",student.age)
-                break
-        else:
-            print("Student Does not exist")
-    except ValueError:
-        print("Invalid Roll no.")
+    student = find_student(students)
+    if student is not None:
+        print("="*14,"StudentFound","="*14,"\n")
+        print("Name : ",student.name)
+        print("Roll : ",student.roll)
+        print("Age : ",student.age)
+        print("\n")
+        print("="*40)
+        
+    else:
+        print("Student Does not exist !")
 
 def update_student(students):
-    try:
-        roll = int(input("Enter Roll no. "))
-        for student in students:
-            if student.roll == roll:
-                name = input("Enter updated name :")
-                age = int(input("Enter Updates age :"))
-                student.name = name
-                student.age = age
-                print("Updated Successfully !!!")
-                break
-        else:
-            print("Student is not present")
-    except ValueError:
-        print("Invalid Roll no.")
-
-
+    student = find_student(students)
+    if student is not None:
+        name = input("Enter new Name (leave blank to keep old name):")
+        age = input("Enter new Age (leave blank to keep old age):")
+        if name != "":
+            student.name = name
+        if age != "":
+            student.age = int(age)
+        print("Updated Successfully !!!")
+    else:
+        print("Student Does not exist !")
 
 class Student:
     def __init__(self,name,roll,age):
@@ -125,17 +136,15 @@ while True:
     print("4. Search Student")
     print("5. Update Student")
     print("6. Count Student")
-    print("7. Exit\n")
+    print("7. Sort Student")
+    print("8. Exit\n")
 
     try:
         choice = int(input("Enter Your Choice: "))
 
         if choice==1:
             new = add_student(students)
-            if new is None:
-                pass
-
-            else:
+            if new:
                 students.append(new)
                 save_students(students)
 
@@ -155,8 +164,32 @@ while True:
 
         elif choice == 6:
             print("Total Students  ",len(students))
-
+        
         elif choice == 7:
+            print("1. Sort by Name")
+            print("2. Sort by Age")
+            print("3. Sort by Roll no.")
+            sort_choice = int(input("Enter Choice :"))
+
+            if sort_choice == 1:
+                students.sort(key = lambda student: student.name)
+                save_students(students)
+                print("Sorted Successfully !")
+
+            elif sort_choice == 2:
+                students.sort(key = lambda student: student.age)
+                save_students(students)
+                print("Sorted Successfully !")
+
+            elif sort_choice == 3:
+                students.sort(key = lambda student: student.roll)
+                save_students(students)
+                print("Sorted Successfully !")
+            
+            else:
+                print("Invalid Input")
+
+        elif choice == 8:
             break;
 
         else :
@@ -164,5 +197,7 @@ while True:
 
     except ValueError:
         print("Enter Valid Choice")
+
+    
 
     
