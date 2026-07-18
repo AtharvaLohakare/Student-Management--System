@@ -1,1 +1,77 @@
-[]
+[
+  {
+    "name": "Atharva",
+    "roll": 101,
+    "age": 20
+  },
+  {
+    "name": "Rahul",
+    "roll": 102,
+    "age": 19
+  },
+  {
+    "name": "Priya",
+    "roll": 103,
+    "age": 21
+  },
+  {
+    "name": "Sneha",
+    "roll": 104,
+    "age": 20
+  },
+  {
+    "name": "Rohan",
+    "roll": 105,
+    "age": 22
+  },
+  {
+    "name": "Anjali",
+    "roll": 106,
+    "age": 19
+  },
+  {
+    "name": "Karan",
+    "roll": 107,
+    "age": 21
+  },
+  {
+    "name": "Meera",
+    "roll": 108,
+    "age": 20
+  },
+  {
+    "name": "Aditya",
+    "roll": 109,
+    "age": 23
+  },
+  {
+    "name": "Neha",
+    "roll": 110,
+    "age": 18
+  },
+  {
+    "name": "Vikas",
+    "roll": 111,
+    "age": 22
+  },
+  {
+    "name": "Pooja",
+    "roll": 112,
+    "age": 20
+  },
+  {
+    "name": "Aman",
+    "roll": 113,
+    "age": 21
+  },
+  {
+    "name": "Simran",
+    "roll": 114,
+    "age": 19
+  },
+  {
+    "name": "Yash",
+    "roll": 115,
+    "age": 22
+  }
+]
