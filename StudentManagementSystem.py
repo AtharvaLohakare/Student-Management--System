@@ -1,4 +1,5 @@
 import json
+import csv
 
 def save_students(students):
     data = []
@@ -9,7 +10,44 @@ def save_students(students):
         json.dump(data,f)
     # json.dump(students)
 
+def export_student_data(students):
+    with open("student.csv","w",newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["Name", "Roll", "Age"])
+        for student in students:
+            s = [student.name,student.roll,student.age]
+            writer.writerow(s)
 
+
+def import_student_data(students):
+    try:
+        with open("student.csv", "r", newline="") as f:
+            reader = csv.reader(f)
+
+            next(reader)      # Skip the header row
+
+            for item in reader:
+                name = item[0]
+                roll = int(item[1])
+                age = int(item[2])
+
+                # Check duplicate roll number
+                duplicate = False
+                for student in students:
+                    if student.roll == roll:
+                        duplicate = True
+                        break
+
+                if not duplicate:
+                    students.append(Student(name, roll, age))
+
+        print("Students Imported Successfully!")
+
+    except FileNotFoundError:
+        print("student.csv not found!")
+
+    except ValueError:
+        print("Invalid data in CSV file!")
 
 def load_students(students):
     try:
@@ -26,7 +64,6 @@ def load_students(students):
     except json.JSONDecodeError:
         print("students.json is corrupted. Starting with an empty list.")
         save_students(students)
-
 
 def add_student(students):
     print("|| Enter Student Detail ||")
@@ -45,8 +82,6 @@ def add_student(students):
     except ValueError:
         print("Invalid details")
 
-    
-
 def display_students(students):
     if len(students) == 0:
         print("No Student Found")
@@ -60,18 +95,21 @@ def display_students(students):
         print("=" * 40)
 
 def find_student(students):
-    roll_name = input("Enter Roll no. or name ")
-    if roll_name.isdigit():
-        roll_name = int(roll_name)
-    else:
-        roll_name = roll_name.lower()
-    
-    for student in students:
-        if student.roll == roll_name or student.name.lower() == roll_name:
-            return student
-    else:
-        return None
+    try:
+        roll_name = input("Enter Roll no. or name ")
+        if roll_name.isdigit():
+            roll_name = int(roll_name)
+        else:
+            roll_name = roll_name.lower()
+        
+        for student in students:
+            if student.roll == roll_name or student.name.lower() == roll_name:
+                return student
+        else:
+            return None
 
+    except ValueError:
+       print("Inavlid Detail !")
 
 def delete_student(students):
     student = find_student(students)
@@ -121,7 +159,7 @@ students = []
 
 
 load_students(students)
-
+import_student_data(students)
 
 
 
@@ -144,6 +182,7 @@ while True:
             if new:
                 students.append(new)
                 save_students(students)
+                export_student_data(students)
 
         elif choice ==2:
             display_students(students)
@@ -194,7 +233,3 @@ while True:
 
     except ValueError:
         print("Enter Valid Choice")
-
-    
-
-    
