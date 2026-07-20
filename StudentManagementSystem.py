@@ -11,7 +11,7 @@ def save_students(students):
     # json.dump(students)
 
 def export_student_data(students):
-    with open("student.csv","w",newline="") as f:
+    with open("students.csv","w",newline="") as f:
         writer = csv.writer(f)
         writer.writerow(["Name", "Roll", "Age"])
         for student in students:
@@ -21,7 +21,7 @@ def export_student_data(students):
 
 def import_student_data(students):
     try:
-        with open("student.csv", "r", newline="") as f:
+        with open("students.csv", "r", newline="") as f:
             reader = csv.reader(f)
             next(reader)
             for item in reader:
@@ -199,9 +199,12 @@ while True:
             print("Total Students  ",len(students))
         
         elif choice == 7:
-            print("1. Sort by Name")
-            print("2. Sort by Age")
-            print("3. Sort by Roll no.")
+            print("1. Name (A-Z)")
+            print("2. Name (Z-A)")
+            print("3. Age (Low-High)")
+            print("4. Age (High-Low)")
+            print("5. Roll (Low-High)")
+            print("6. Roll (High-Low)")
             sort_choice = int(input("Enter Choice :"))
 
             if sort_choice == 1:
@@ -209,13 +212,29 @@ while True:
                 save_students(students)
                 print("Sorted Successfully !")
 
-            elif sort_choice == 2:
-                students.sort(key = lambda student: student.age)
+            if sort_choice == 2:
+                students.sort(key = lambda student: student.name, reverse = True)
                 save_students(students)
                 print("Sorted Successfully !")
 
             elif sort_choice == 3:
+                students.sort(key = lambda student: student.age)
+                save_students(students)
+                print("Sorted Successfully !")
+
+            elif sort_choice == 4:
+                students.sort(key = lambda student: student.age, reverse = True)
+                save_students(students)
+                print("Sorted Successfully !")
+
+            elif sort_choice == 35:
                 students.sort(key = lambda student: student.roll)
+                save_students(students)
+                export_student_data(students)
+                print("Sorted Successfully !")
+
+            elif sort_choice == 6:
+                students.sort(key = lambda student: student.roll, reverse = True)
                 save_students(students)
                 export_student_data(students)
                 print("Sorted Successfully !")
