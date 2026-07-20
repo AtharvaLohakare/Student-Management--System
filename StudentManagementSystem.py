@@ -211,24 +211,28 @@ while True:
             if sort_choice == 1:
                 students.sort(key = lambda student: student.name)
                 save_students(students)
+                export_student_data(students)
                 print("Sorted Successfully !")
 
             if sort_choice == 2:
                 students.sort(key = lambda student: student.name, reverse = True)
                 save_students(students)
+                export_student_data(students)
                 print("Sorted Successfully !")
 
             elif sort_choice == 3:
                 students.sort(key = lambda student: student.age)
                 save_students(students)
+                export_student_data(students)
                 print("Sorted Successfully !")
 
             elif sort_choice == 4:
                 students.sort(key = lambda student: student.age, reverse = True)
                 save_students(students)
+                export_student_data(students)
                 print("Sorted Successfully !")
 
-            elif sort_choice == 35:
+            elif sort_choice == 5:
                 students.sort(key = lambda student: student.roll)
                 save_students(students)
                 export_student_data(students)
@@ -244,41 +248,33 @@ while True:
                 print("Invalid Input")
         
         elif choice==8:
-            # print("1. Total Students")
-
-            # print("2. Average Age")
-
-            # print("3. Youngest Student")
-
-            # print("4. Oldest Student")
             
+            print("="*14,"Statistics","="*14,"\n")
+            
+
             print(f"Total Students : {len(students)}")
-        
-            for student in students:
-                sum =+ student.age
-            print(f"Average age : {sum/len(students)}")
 
-            students.sort(key = lambda student: student.age)
+            if len(students) == 0:
+                print("Data unavailable")
+            else:
+                total = 0
+                for student in students:
+                    total += student.age
+                print(f"Average Age : {total / len(students):.2f}")
+
+                students.sort(key=lambda student: student.age)
+
+                youngest = students[0]
+
+                print(f"Youngest Student : {youngest.name} {youngest.age} {youngest.roll}")
+                students.sort(key=lambda student: student.age, reverse=True)
+
+                oldest = students[0]
+                print(f"Oldest Student : {oldest.name} {oldest.age} {oldest.roll}")
+
+                print("="*40)
             
-            youngest_age = student.roll 
-
-            for student in students:
-                if student.roll == youngest_age:
-                    print("Youngest Student")
-                    print("Name : ",student.name)
-                    print("Roll : ",student.roll)
-                    print("Age : ",student.age)
-
-            students.sort(key = lambda student: student.age, reverse=True)
-            oldest_age = student.roll
-
-            for student in students:
-                if student.roll == oldest_age:
-                    print("Oldest Student")
-                    print("Name : ",student.name)
-                    print("Roll : ",student.roll)
-                    print("Age : ",student.age)
-            
+                        
         elif choice == 9:
             break;
 
