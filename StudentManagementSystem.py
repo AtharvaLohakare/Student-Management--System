@@ -140,6 +140,32 @@ def update_student(students):
     else:
         print("Student Does not exist !")
 
+def statistics(students):
+    print("="*14,"Statistics","="*14,"\n")
+    
+
+    print(f"Total Students : {len(students)}")
+
+    if len(students) == 0:
+        print("Data unavailable")
+    else:
+        total = 0
+        for student in students:
+            total += student.age
+        print(f"Average Age : {total / len(students):.2f}")
+
+        students.sort(key=lambda student: student.age)
+
+        youngest = students[0]
+
+        print(f"Youngest Student : {youngest.name} {youngest.age} {youngest.roll}")
+        students.sort(key=lambda student: student.age, reverse=True)
+
+        oldest = students[0]
+        print(f"Oldest Student : {oldest.name} {oldest.age} {oldest.roll}")
+
+        print("="*40)
+
 class Student:
     def __init__(self,name,roll,age):
         self.name = name
@@ -247,33 +273,8 @@ while True:
             else:
                 print("Invalid Input")
         
-        elif choice==8:
-            
-            print("="*14,"Statistics","="*14,"\n")
-            
-
-            print(f"Total Students : {len(students)}")
-
-            if len(students) == 0:
-                print("Data unavailable")
-            else:
-                total = 0
-                for student in students:
-                    total += student.age
-                print(f"Average Age : {total / len(students):.2f}")
-
-                students.sort(key=lambda student: student.age)
-
-                youngest = students[0]
-
-                print(f"Youngest Student : {youngest.name} {youngest.age} {youngest.roll}")
-                students.sort(key=lambda student: student.age, reverse=True)
-
-                oldest = students[0]
-                print(f"Oldest Student : {oldest.name} {oldest.age} {oldest.roll}")
-
-                print("="*40)
-            
+       elif choice==8:
+            statistics(students) 
                         
         elif choice == 9:
             break;
