@@ -23,9 +23,7 @@ def import_student_data(students):
     try:
         with open("student.csv", "r", newline="") as f:
             reader = csv.reader(f)
-
-            next(reader)      # Skip the header row
-
+            next(reader)
             for item in reader:
                 name = item[0]
                 roll = int(item[1])
@@ -37,11 +35,8 @@ def import_student_data(students):
                     if student.roll == roll:
                         duplicate = True
                         break
-
                 if not duplicate:
                     students.append(Student(name, roll, age))
-
-        print("Students Imported Successfully!")
 
     except FileNotFoundError:
         print("student.csv not found!")
@@ -158,7 +153,7 @@ students = []
 # print(s1.name)
 
 
-load_students(students)
+# load_students(students) for json
 import_student_data(students)
 
 
@@ -190,6 +185,7 @@ while True:
         elif choice == 3:
             delete_student(students)
             save_students(students)
+            export_student_data(students)
 
         elif choice == 4:
             search_student(students)
@@ -197,6 +193,7 @@ while True:
         elif choice == 5:
             update_student(students)
             save_students(students)
+            export_student_data(students)
 
         elif choice == 6:
             print("Total Students  ",len(students))
@@ -220,6 +217,7 @@ while True:
             elif sort_choice == 3:
                 students.sort(key = lambda student: student.roll)
                 save_students(students)
+                export_student_data(students)
                 print("Sorted Successfully !")
             
             else:
