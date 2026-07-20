@@ -167,7 +167,8 @@ while True:
     print("5. Update Student")
     print("6. Count Student")
     print("7. Sort Student")
-    print("8. Exit\n")
+    print("8. Statistics")
+    print("9. Exit\n")
 
     try:
         choice = int(input("Enter Your Choice: "))
@@ -241,8 +242,44 @@ while True:
             
             else:
                 print("Invalid Input")
+        
+        elif choice==8:
+            # print("1. Total Students")
 
-        elif choice == 8:
+            # print("2. Average Age")
+
+            # print("3. Youngest Student")
+
+            # print("4. Oldest Student")
+            
+            print(f"Total Students : {len(students)}")
+        
+            for student in students:
+                sum =+ student.age
+            print(f"Average age : {sum/len(students)}")
+
+            students.sort(key = lambda student: student.age)
+            
+            youngest_age = student.roll 
+
+            for student in students:
+                if student.roll == youngest_age:
+                    print("Youngest Student")
+                    print("Name : ",student.name)
+                    print("Roll : ",student.roll)
+                    print("Age : ",student.age)
+
+            students.sort(key = lambda student: student.age, reverse=True)
+            oldest_age = student.roll
+
+            for student in students:
+                if student.roll == oldest_age:
+                    print("Oldest Student")
+                    print("Name : ",student.name)
+                    print("Roll : ",student.roll)
+                    print("Age : ",student.age)
+            
+        elif choice == 9:
             break;
 
         else :
